@@ -2,12 +2,17 @@
 #define MNEMOPKG_H
 
 #include <QObject>
+#include <QQmlEngine>
+#include "mnemoconfig.h"
 
 class MnemoPkg : public QObject
 {
     Q_OBJECT
 public:
-    explicit MnemoPkg(QObject *parent = nullptr);
+    explicit MnemoPkg(QQmlEngine *engine, QObject *parent = nullptr);
+
+private:
+    MnemoConfig mnemoConfig;
 
 signals:
 

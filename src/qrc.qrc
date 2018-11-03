@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Mnemo/Base/BaseIndicator.qml</file>
+        <file>Mnemo/Indicator.qml</file>
+    </qresource>
+</RCC>
