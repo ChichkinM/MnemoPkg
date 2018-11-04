@@ -3,20 +3,18 @@ import QtQuick 2.0
 MouseArea {
     id: root
 
-    //для симметрии должны быть четным
+    //для симметрии должны быть четными
     property int widthPartsCount: 20
     property int heightPartsCount: 10
 
-    property var partOfSize: Config.marginX1Scaled
-
-    width: Math.round(widthPartsCount * partOfSize)
-    height: Math.round(heightPartsCount * partOfSize)
+    width: Math.round(widthPartsCount * Config.minSize)
+    height: Math.round(heightPartsCount * Config.minSize)
 
     property string text: "Модуль"
 //    property string img: Config.indicatorImgOrangeDotted()
-//    property string color: Config.textColorWhite()
+    property string color: /*Config.textColorWhite()*/"black"
 
-    property string fontSize: Config.fontMediumWithScale
+    property string fontSize: /*Config.fontMediumWithScale*/"12"
     property bool fontBold: true
 
     //необходимо для высчитывания абсолютных координат

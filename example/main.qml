@@ -10,6 +10,7 @@ Window {
     title: qsTr("Hello World")
 
     Mnemo.Indicator {
-
+        x: 10
+        y: 10
     }
 }
