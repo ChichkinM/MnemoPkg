@@ -6,9 +6,13 @@ Item {
     property bool showHeader: true
 
     signal goTo(string destinationPageSource)
+    signal goBack()
+    function goToGeneral() {
+        goTo(mainPageSource)
+    }
 
     focus: true
-    Keys.onEscapePressed: toGeneral()
+    Keys.onEscapePressed: goToGeneral()
     Keys.onPressed: if (event.key === Qt.Key_Backspace) goBack()
 
 //    Connections { target: ConfigObj; onSetColorForRepeaterChild: {

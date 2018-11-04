@@ -10,9 +10,9 @@ Item {
 
         width: Math.round(root.width)
         height: Math.round(root.height)
-
         focus: true
 
+        property string mainPageSource: root.mainPageSource
         source: root.mainPageSource
     }
 
