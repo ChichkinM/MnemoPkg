@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import ConfigType 1.0
 
 MouseArea {
     id: root
@@ -111,10 +112,13 @@ MouseArea {
     }
 
     Rectangle {
-        width: 20 * ConfigObj.scale
+        width: 10 * ConfigObj.scale
         height: width
         radius: width / 2
-        color: "red"
+        anchors.horizontalCenter: root.horizontalCenter
+        anchors.bottom: root.top
+        anchors.bottomMargin: - width / 2
+        color: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
         visible: root.focus
         Component.onCompleted: if (focus == true) console.log( objectName )
     }

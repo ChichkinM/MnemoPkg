@@ -6,5 +6,7 @@
         <file>Mnemo/Line.qml</file>
         <file>Mnemo/MnemoPage.qml</file>
         <file>Mnemo/Main.qml</file>
+        <file>Mnemo/Base/BaseText.qml</file>
+        <file>Mnemo/Label.qml</file>
     </qresource>
 </RCC>

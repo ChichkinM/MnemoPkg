@@ -3,7 +3,11 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property bool showHeader: true
+    property bool showBackBtn: true
+    property bool showHomeBtn: true
+    property bool showPageTitle: true
+    property string title: "Страница мнемосхемы"
+    property int headerY: backBtn.y + backBtn.height
 
     signal goTo(string destinationPageSource)
     signal goBack()
@@ -15,49 +19,52 @@ Item {
     Keys.onEscapePressed: goToGeneral()
     Keys.onPressed: if (event.key === Qt.Key_Backspace) goBack()
 
-//    Connections { target: ConfigObj; onSetColorForRepeaterChild: {
-//            for (var i = 0; ; i++) {
-//                var item = repeaterObj.itemAt(i)
-//                if (item !== null && item.objectName === childObjName) {
-//                    item.color = value
-//                    return
-//                }
-//                else if (item === null)
-//                    return
-//            }
-//        }
-//    }
+    //    Connections { target: ConfigObj; onSetColorForRepeaterChild: {
+    //            for (var i = 0; ; i++) {
+    //                var item = repeaterObj.itemAt(i)
+    //                if (item !== null && item.objectName === childObjName) {
+    //                    item.color = value
+    //                    return
+    //                }
+    //                else if (item === null)
+    //                    return
+    //            }
+    //        }
+    //    }
 
-//    Item {
-//        id: headerBtn
+    Label {
+        id: backBtn
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        text: "Назад"
+        visible: root.showBackBtn
 
-//        anchors.right: root.right
-//        anchors.rightMargin: Config.marginX1ScaledRounded
-//        width: backImg.width
-//        height: backImg.height
+        MouseArea {
+            anchors.fill: backBtn
+            onClicked: goBack()
+        }
+    }
 
-//        z: 5
-//        visible: root.showHeader
+    Label {
+        id: homeBtn
+        anchors.top: backBtn.top
+        anchors.left: backBtn.right
+        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        text: "Домой"
+        visible: root.showHomeBtn
 
+        MouseArea {
+            anchors.fill: homeBtn
+            onClicked: goToGeneral()
+        }
+    }
 
-//        MouseArea {
-//            anchors.left: backImg.left
-//            anchors.top: backImg.top
-
-//            width: backImg.width * 0.35
-//            height: backImg.height
-
-//            onClicked: goBack()
-//        }
-
-//        MouseArea {
-//            anchors.right: backImg.right
-//            anchors.top: backImg.top
-
-//            width: backImg.width * 0.65
-//            height: backImg.height
-
-//            onClicked: toGeneral()
-//        }
-//    }
+    Label {
+        anchors.top: backBtn.top
+        anchors.horizontalCenter: root.horizontalCenter
+        anchors.rightMargin: ConfigObj.minSizeScaled * 2
+        text: root.title
+        visible: root.showPageTitle
+    }
 }

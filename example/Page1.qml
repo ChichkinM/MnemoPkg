@@ -3,12 +3,26 @@ import "qrc:/Mnemo" as Mnemo
 import CPoint 1.0
 
 Mnemo.MnemoPage {
+    id: root
+
     Mnemo.Indicator {
         id: i1
-        x: 10
-        y: 10
+        x: ConfigObj.minSizeScaledRounded * 2
+        y: headerY + ConfigObj.minSizeScaledRounded * 2
+
+        KeyNavigation.down: i2
 
         onGoInside: goTo("qrc:/Page2.qml")
+        Component.onCompleted: i1.forceActiveFocus()
+    }
+
+    Mnemo.Indicator {
+        id: i2
+        anchors.left: i1.left
+        anchors.top: i1.bottom
+        anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
+
+        onGoInside: goTo("qrc:/Page3.qml")
     }
 
     Mnemo.Line {
