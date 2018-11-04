@@ -3,8 +3,7 @@
 #include <QDebug>
 #include <QQmlContext>
 
-MnemoPkg::MnemoPkg(QQmlEngine *engine, QObject *parent) : QObject(parent)
-{
-    qDebug() << "MnemoPkg::MnemoPkg";
-    engine->rootContext()->setContextProperty("Config", &mnemoConfig);
+MnemoPkg::MnemoPkg(QQmlEngine *engine, QObject *parent) : QObject(parent) {
+    engine->rootContext()->setContextProperty("ConfigObj", &mnemoConfig);
+    qmlRegisterType<MnemoConfig>("ConfigType", 1, 0, "ConfigType");
 }

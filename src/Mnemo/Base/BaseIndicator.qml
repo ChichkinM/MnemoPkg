@@ -7,8 +7,8 @@ MouseArea {
     property int widthPartsCount: 20
     property int heightPartsCount: 10
 
-    width: Math.round(widthPartsCount * Config.minSize)
-    height: Math.round(heightPartsCount * Config.minSize)
+    width: Math.round(widthPartsCount * ConfigObj.minSizeScaled)
+    height: Math.round(heightPartsCount * ConfigObj.minSizeScaled)
 
     property string text: "Модуль"
 //    property string img: Config.indicatorImgOrangeDotted()
@@ -110,7 +110,7 @@ MouseArea {
     }
 
     Rectangle {
-        width: 20 * Config.scale
+        width: 20 * ConfigObj.scale
         height: width
         radius: width / 2
         color: "red"
