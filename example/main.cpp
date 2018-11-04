@@ -6,9 +6,9 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    MnemoPkg pkg;
-
     QQmlApplicationEngine engine;
+    MnemoPkg pkg(&engine);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

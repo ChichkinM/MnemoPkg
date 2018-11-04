@@ -1,31 +1,28 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 
+import "qrc:/Mnemo" as Mnemo
+
+
 Window {
+    id: root
+
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            console.log(qsTr('Clicked on background. Text: "' + textEdit.text + '"'))
-        }
+    onWidthChanged: setScale()
+    onHeightChanged: setScale()
+    function setScale() {
+        if (root.width < root.height)
+            ConfigObj.setScale(root.width / 640)
+        else
+            ConfigObj.setScale(root.height / 480)
     }
 
-    TextEdit {
-        id: textEdit
-        text: qsTr("Enter some text...")
-        verticalAlignment: Text.AlignVCenter
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 20
-        Rectangle {
-            anchors.fill: parent
-            anchors.margins: -10
-            color: "transparent"
-            border.width: 1
-        }
+    Mnemo.Main {
+        anchors.fill: parent
+        mainPageSource: "qrc:/Page1.qml"
     }
 }
