@@ -55,9 +55,10 @@ MouseArea {
         return Math.round( getParentAdditionX() +
                           root.x )
     }
-    function slotLeftFromCenterY(slotNumber) {
+    function
+    slotLeftFromCenterY(slotNumber) {
         return Math.round( getParentAdditionY() +
-                          root.y + root.partOfSize * (root.heightPartsCount / 2) + root.partOfSize * slotNumber )
+                          root.y + ConfigObj.minSizeScaled * (root.heightPartsCount / 2) + ConfigObj.minSizeScaled * slotNumber )
     }
 
     function slotRightFromCenterX() {
@@ -70,7 +71,7 @@ MouseArea {
 
     function slotBottomFromCenterX(slotNumber) {
         return Math.round( getParentAdditionX() +
-                          root.x + root.partOfSize * (root.widthPartsCount / 2) + root.partOfSize * slotNumber )
+                          root.x + ConfigObj.minSizeScaled * (root.widthPartsCount / 2) + ConfigObj.minSizeScaled * slotNumber )
     }
     function slotBottomFromCenterY() {
         return Math.round( getParentAdditionY() +

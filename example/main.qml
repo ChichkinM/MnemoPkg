@@ -1,6 +1,8 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+
 import "qrc:/Mnemo" as Mnemo
+import CPoint 1.0
 
 
 Window {
@@ -21,8 +23,20 @@ Window {
             ConfigObj.setScale(root.height / 480)
     }
 
+
     Mnemo.Indicator {
+        id: i1
         x: 10
         y: 10
+    }
+
+    Mnemo.Line {
+        points: [
+            CPoint { x: i1.slotRightFromCenterX(); y: i1.slotRightFromCenterY(0) },
+            CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
+                y: i1.slotRightFromCenterY(0) },
+            CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
+                y: i1.slotRightFromCenterY(0) + ConfigObj.minSizeScaledRounded * 8 }
+        ]
     }
 }

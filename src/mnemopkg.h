@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+
 #include "mnemoconfig.h"
 
 class MnemoPkg : public QObject
