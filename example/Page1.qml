@@ -4,6 +4,7 @@ import CPoint 1.0
 
 Mnemo.MnemoPage {
     id: root
+    title: "Страница 1"
 
     Mnemo.Indicator {
         id: i1
@@ -12,7 +13,6 @@ Mnemo.MnemoPage {
 
         KeyNavigation.down: i2
 
-        onGoInside: goTo("qrc:/Page2.qml")
         Component.onCompleted: i1.forceActiveFocus()
     }
 
@@ -22,7 +22,7 @@ Mnemo.MnemoPage {
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
 
-        onGoInside: goTo("qrc:/Page3.qml")
+        onGoInside: goTo("qrc:/Page2.qml")
     }
 
     Mnemo.Line {
