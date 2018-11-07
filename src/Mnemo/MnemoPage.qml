@@ -15,22 +15,19 @@ Item {
         goTo(mainPageSource)
     }
 
+    function makeItemObjectName(itemName) {
+        return root.objectName + "_" + itemName
+    }
+
+    Component.onCompleted: {
+        var itemWithFocus = getFocus(objectName)
+        if (itemWithFocus !== undefined && itemWithFocus !== null)
+            MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()
+    }
+
     focus: true
     Keys.onEscapePressed: goToGeneral()
     Keys.onPressed: if (event.key === Qt.Key_Backspace) goBack()
-
-    //    Connections { target: ConfigObj; onSetColorForRepeaterChild: {
-    //            for (var i = 0; ; i++) {
-    //                var item = repeaterObj.itemAt(i)
-    //                if (item !== null && item.objectName === childObjName) {
-    //                    item.color = value
-    //                    return
-    //                }
-    //                else if (item === null)
-    //                    return
-    //            }
-    //        }
-    //    }
 
     Label {
         id: backBtn

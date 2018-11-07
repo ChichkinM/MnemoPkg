@@ -5,9 +5,11 @@ import CPoint 1.0
 Mnemo.MnemoPage {
     id: root
     title: "Страница 1"
+    objectName: "page1"
 
     Mnemo.Indicator {
         id: i1
+        objectName: makeItemObjectName("i1")
         x: ConfigObj.minSizeScaledRounded * 2
         y: headerY + ConfigObj.minSizeScaledRounded * 2
 
@@ -18,11 +20,15 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i2
+        objectName: makeItemObjectName("i2")
         anchors.left: i1.left
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
 
-        onGoInside: goTo("qrc:/Page2.qml")
+        onGoInside: {
+            saveFocus(root.objectName, objectName)
+            goTo("qrc:/Page2.qml")
+        }
     }
 
     Mnemo.Line {

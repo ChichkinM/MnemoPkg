@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 
 #include "mnemoconfig.h"
+#include "mnemohelper.h"
 
 class MnemoPkg : public QObject
 {
@@ -14,6 +15,7 @@ public:
 
 private:
     MnemoConfig mnemoConfig;
+    MnemoHelper mnemoHelper;
 
 signals:
 
