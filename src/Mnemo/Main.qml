@@ -1,7 +1,9 @@
 import QtQuick 2.0
+import ConfigType 1.0
 
-Item {
+Rectangle {
     id: root
+    color: ConfigObj.getPropertyFromSettings(ConfigType.Background)
 
     property string mainPageSource
 

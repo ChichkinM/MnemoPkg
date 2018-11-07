@@ -2,6 +2,8 @@
 #define MNEMOCONFIG_H
 
 #include <QObject>
+#include <QSettings>
+#include <QFile>
 #include <QDebug>
 
 class MnemoConfig : public QObject
@@ -15,9 +17,14 @@ class MnemoConfig : public QObject
 
 public:
     MnemoConfig(QObject *parent = nullptr) : QObject(parent) {
+        if (!QFile::exists("MnemoSettings.ini"))
+            QFile::copy(":/MnemoSettings.ini", "MnemoSettings.ini");
 
+        settings = new QSettings("MnemoSettings.ini", QSettings::IniFormat);
     }
-    ~MnemoConfig() { }
+    ~MnemoConfig() {
+        delete settings;
+    }
 
 
     Q_INVOKABLE int minSize() const { return m_minSize; }
@@ -26,13 +33,52 @@ public:
     double minSizeScaled() const { return m_minSize * m_scale; }
     int minSizeScaledRounded() const { return m_minSize * m_scale; }
 
-    enum class Colors { DefaultColorForIndicatorBorder, GoodColorForIndicatorBorder, BadColorForIndicatorBorder,
-                        DefaultColorForIndicatorFilling, GoodColorForIndicatorFilling, BadColorForIndicatorFilling};
+    enum class Colors {
+        Background,
+        DefaultColorForIndicatorBorder, GoodColorForIndicatorBorder, BadColorForIndicatorBorder,
+        DefaultColorForIndicatorFilling, GoodColorForIndicatorFilling, BadColorForIndicatorFilling,
+        DefaultColorForIndicatorText, GoodColorForIndicatorText, BadColorForIndicatorText,
+        DefaultColorForLine, GoodColorForLine, BadColorForLine
+
+    };
 
     Q_INVOKABLE QVariant getPropertyFromSettings(Colors colorEnum) {
+        auto getValue = [this](QString value, QString defaultValue) {
+            return settings->value(settings->value("General/Theme", "Dark").toString() + "/" + value, defaultValue);
+        };
+
         switch (colorEnum) {
+        case Colors::Background:
+            return getValue("Background", "black");
+
         case Colors::DefaultColorForIndicatorBorder:
-            return "steelblue";
+            return getValue("Indicator/Border/Default", "blue");
+        case Colors::GoodColorForIndicatorBorder:
+            return getValue("Indicator/Border/Good", "green");
+        case Colors::BadColorForIndicatorBorder:
+            return getValue("Indicator/Border/Bad", "red");
+
+        case Colors::DefaultColorForIndicatorFilling:
+            return getValue("Indicator/Filling/Default", "blue");
+        case Colors::GoodColorForIndicatorFilling:
+            return getValue("Indicator/Filling/Good", "green");
+        case Colors::BadColorForIndicatorFilling:
+            return getValue("Indicator/Filling/Bad", "red");
+
+        case Colors::DefaultColorForIndicatorText:
+            return getValue("Indicator/Text/Default", "blue");
+        case Colors::GoodColorForIndicatorText:
+            return getValue("Indicator/Text/Good", "green");
+        case Colors::BadColorForIndicatorText:
+            return getValue("Indicator/Text/Bad", "red");
+
+        case Colors::DefaultColorForLine:
+            return getValue("Indicator/Line/Default", "blue");
+        case Colors::GoodColorForLine:
+            return getValue("Indicator/Line/Good", "green");
+        case Colors::BadColorForLine:
+            return getValue("Indicator/Line/Bad", "red");
+
         default:
             return "black";
         }
@@ -41,6 +87,8 @@ public:
 private:
     double m_scale = 1;
     int m_minSize = 6;
+
+    QSettings *settings;
 
 signals:
     void scaleChanged(double scale);
