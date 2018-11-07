@@ -3,57 +3,70 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property bool showHeader: true
+    property string pageObjectName: objectName
+    property bool showBackBtn: true
+    property bool showHomeBtn: true
+    property bool showPageTitle: true
+    property string title: "Страница мнемосхемы"
+    property int headerY: backBtn.y + backBtn.height
+    property string defaultFoucusObjectName
 
     signal goTo(string destinationPageSource)
+    signal goBack()
+    function goToGeneral() {
+        goTo(mainPageSource)
+    }
+
+    function makeItemObjectName(itemName) {
+        return root.objectName + "_" + itemName
+    }
+
+    Component.onCompleted: {
+        if (defaultFoucusObjectName !== "")
+            trySetDefaultFocus(objectName, defaultFoucusObjectName)
+
+        var itemWithFocus = getFocus(objectName)
+        if (itemWithFocus !== undefined && itemWithFocus !== null)
+            MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()
+    }
 
     focus: true
-    Keys.onEscapePressed: toGeneral()
+    Keys.onEscapePressed: goToGeneral()
     Keys.onPressed: if (event.key === Qt.Key_Backspace) goBack()
 
-//    Connections { target: ConfigObj; onSetColorForRepeaterChild: {
-//            for (var i = 0; ; i++) {
-//                var item = repeaterObj.itemAt(i)
-//                if (item !== null && item.objectName === childObjName) {
-//                    item.color = value
-//                    return
-//                }
-//                else if (item === null)
-//                    return
-//            }
-//        }
-//    }
+    Label {
+        id: backBtn
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        text: "Назад"
+        visible: root.showBackBtn
 
-//    Item {
-//        id: headerBtn
+        MouseArea {
+            anchors.fill: backBtn
+            onClicked: goBack()
+        }
+    }
 
-//        anchors.right: root.right
-//        anchors.rightMargin: Config.marginX1ScaledRounded
-//        width: backImg.width
-//        height: backImg.height
+    Label {
+        id: homeBtn
+        anchors.top: backBtn.top
+        anchors.left: backBtn.right
+        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        text: "Домой"
+        visible: root.showHomeBtn
 
-//        z: 5
-//        visible: root.showHeader
+        MouseArea {
+            anchors.fill: homeBtn
+            onClicked: goToGeneral()
+        }
+    }
 
-
-//        MouseArea {
-//            anchors.left: backImg.left
-//            anchors.top: backImg.top
-
-//            width: backImg.width * 0.35
-//            height: backImg.height
-
-//            onClicked: goBack()
-//        }
-
-//        MouseArea {
-//            anchors.right: backImg.right
-//            anchors.top: backImg.top
-
-//            width: backImg.width * 0.65
-//            height: backImg.height
-
-//            onClicked: toGeneral()
-//        }
-//    }
+    Label {
+        anchors.top: backBtn.top
+        anchors.horizontalCenter: root.horizontalCenter
+        anchors.rightMargin: ConfigObj.minSizeScaled * 2
+        text: root.title
+        visible: root.showPageTitle
+    }
 }
