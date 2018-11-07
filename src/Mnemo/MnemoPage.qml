@@ -3,11 +3,13 @@ import QtQuick 2.0
 Item {
     id: root
 
+    property string pageObjectName: objectName
     property bool showBackBtn: true
     property bool showHomeBtn: true
     property bool showPageTitle: true
     property string title: "Страница мнемосхемы"
     property int headerY: backBtn.y + backBtn.height
+    property string defaultFoucusObjectName
 
     signal goTo(string destinationPageSource)
     signal goBack()
@@ -20,6 +22,9 @@ Item {
     }
 
     Component.onCompleted: {
+        if (defaultFoucusObjectName !== "")
+            trySetDefaultFocus(objectName, defaultFoucusObjectName)
+
         var itemWithFocus = getFocus(objectName)
         if (itemWithFocus !== undefined && itemWithFocus !== null)
             MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()

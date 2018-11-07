@@ -23,6 +23,11 @@ MouseArea {
 
     signal goInside()
 
+    onFocusChanged: {
+        if (focus)
+            saveFocus(pageObjectName, objectName)
+    }
+
 
     function objIsExist(obj) {
         if (obj === null || obj === undefined)

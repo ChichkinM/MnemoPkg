@@ -6,6 +6,7 @@ Mnemo.MnemoPage {
     id: root
     title: "Страница 1"
     objectName: "page1"
+    defaultFoucusObjectName: i1.objectName
 
     Mnemo.Indicator {
         id: i1
@@ -14,8 +15,6 @@ Mnemo.MnemoPage {
         y: headerY + ConfigObj.minSizeScaledRounded * 2
 
         KeyNavigation.down: i2
-
-        Component.onCompleted: i1.forceActiveFocus()
     }
 
     Mnemo.Indicator {

@@ -35,6 +35,15 @@ Item {
                     return elementWithFocus[i]
             return undefined
         }
+
+        function trySetDefaultFocus(pageObjectName, itemObjectName) {
+            for (var i = 0; i < pageForElementWithFocus.length; i++)
+                if (pageForElementWithFocus[i] === pageObjectName)
+                    return
+
+            pageForElementWithFocus.push(pageObjectName)
+            elementWithFocus.push(itemObjectName)
+        }
     }
 
     Connections { target: pageLoader.item; onGoTo: {
