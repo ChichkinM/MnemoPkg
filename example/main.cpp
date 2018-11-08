@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+
 #include "mnemopkg.h"
+#include "mnemobehavior.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +12,8 @@ int main(int argc, char *argv[])
     MnemoPkg pkg(&engine);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    MnemoBehavior behavior(engine.rootObjects().at(0));
+
     if (engine.rootObjects().isEmpty())
         return -1;
 
