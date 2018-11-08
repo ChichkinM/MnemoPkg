@@ -12,11 +12,16 @@ MouseArea {
     height: Math.round(heightPartsCount * ConfigObj.minSizeScaled)
 
     property string text: "Модуль"
-//    property string img: Config.indicatorImgOrangeDotted()
-    property string color: /*Config.textColorWhite()*/"black"
+    property string textColor:
+        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorText)
+    property string borderColor:
+        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
+    property string fillingColor:
+        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorFilling)
 
-    property string fontSize: /*Config.fontMediumWithScale*/"12"
-    property bool fontBold: true
+    property string fontSize: ConfigObj.minFontScaled * 2
+    property bool fontBold: ConfigObj.getPropertyFromSettings(ConfigType.BoldForIndicatorText)
+    property string fontFamily: ConfigObj.getPropertyFromSettings(ConfigType.FamilyForIndicatorText)
 
     //необходимо для высчитывания абсолютных координат
     property var parents: [parent, parent.parent]
@@ -103,18 +108,6 @@ MouseArea {
                        KeyNavigation.up !== null || KeyNavigation.down !== null)
                    focus = true
 
-    Text {
-        text: root.text
-        anchors.centerIn: parent
-        color: root.color
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: root.fontSize
-        font.bold: root.fontBold
-        font.family: "Arial"
-        z: 1
-
-        rotation: -root.rotation
-    }
 
     Rectangle {
         width: 10 * ConfigObj.scale
@@ -125,6 +118,6 @@ MouseArea {
         anchors.bottomMargin: - width / 2
         color: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
         visible: root.focus
-        Component.onCompleted: if (focus == true) console.log( objectName )
+        Component.onCompleted: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
     }
 }

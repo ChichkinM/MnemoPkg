@@ -8,5 +8,6 @@
         <file>Mnemo/Main.qml</file>
         <file>Mnemo/Base/BaseText.qml</file>
         <file>Mnemo/Label.qml</file>
+        <file>MnemoSettings.ini</file>
     </qresource>
 </RCC>
