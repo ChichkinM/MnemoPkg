@@ -32,7 +32,7 @@ public:
         m_lineRadius = getValue("Line/Radius", "0").toInt();
         m_indicatorBorderRadius = getValue("Indicator/Border/Radius", "0").toInt();
         m_indicatorFillingRadius = getValue("Indicator/Border/Filling", "0").toInt();
-        m_minFont = getValue("General/MinFont", "8").toInt();
+        m_minFont = getValue("MinFont", "8").toInt();
     }
     ~MnemoConfig() {
         delete settings;
@@ -130,7 +130,7 @@ private:
 
     QVariant getValue(QString value, QString defaultValue) {
         if (settings != nullptr)
-            return settings->value(settings->value("General/Theme", "Dark").toString() + "/" + value, defaultValue);
+            return settings->value(settings->value("Theme", "Dark").toString() + "/" + value, defaultValue);
         return QVariant();
     }
 
