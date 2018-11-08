@@ -19,8 +19,9 @@ MouseArea {
     property string fillingColor:
         ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorFilling)
 
-    property string fontSize: /*Config.fontMediumWithScale*/"12"
-    property bool fontBold: true
+    property string fontSize: ConfigObj.minFontScaled * 2
+    property bool fontBold: ConfigObj.getPropertyFromSettings(ConfigType.BoldForIndicatorText)
+    property string fontFamily: ConfigObj.getPropertyFromSettings(ConfigType.FamilyForIndicatorText)
 
     //необходимо для высчитывания абсолютных координат
     property var parents: [parent, parent.parent]

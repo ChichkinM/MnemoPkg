@@ -5,14 +5,14 @@ import ConfigType 1.0
 BaseIndicator {
     id: root
 
-    Text {
+    Label {
         text: root.text
         anchors.centerIn: parent
         color: root.textColor
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: root.fontSize
         font.bold: root.fontBold
-        font.family: "Arial"
+        font.family: root.fontFamily
         z: 1
     }
 
@@ -21,7 +21,7 @@ BaseIndicator {
         color: "transparent"
         border.color: root.borderColor
         border.width: 2 * ConfigObj.scale
-        radius: 5 * ConfigObj.scale
+        radius: ConfigObj.indicatorBorderRadiusScaledRounded
     }
 
     Rectangle {
@@ -29,6 +29,6 @@ BaseIndicator {
         height: Math.round(root.height - ConfigObj.minSizeScaled * 2)
         anchors.centerIn: root
         color: root.fillingColor
-        radius: 5 * ConfigObj.scale
+        radius: ConfigObj.indicatorFillingRadiusScaledRounded
     }
 }

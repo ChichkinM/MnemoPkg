@@ -7,6 +7,6 @@ CLine {
 
     z: -1
     color: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForLine)
-    radius: /*Config.radiusMedium*/5
-    penWidth: /*Math.round(2 * Config.scale)*/2
+    radius: ConfigObj.lineRadiusScaledRounded
+    penWidth: ConfigObj.lineWidthScaledRounded
 }

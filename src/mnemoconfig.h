@@ -13,6 +13,12 @@ class MnemoConfig : public QObject
     Q_PROPERTY(double scale READ scale WRITE setScale NOTIFY scaleChanged)
     Q_PROPERTY(double minSizeScaled READ minSizeScaled NOTIFY scaleChanged)
     Q_PROPERTY(int minSizeScaledRounded READ minSizeScaledRounded NOTIFY scaleChanged)
+    Q_PROPERTY(double minFontScaled READ minFontScaled NOTIFY scaleChanged)
+
+    Q_PROPERTY(int lineWidthScaledRounded READ lineWidthScaledRounded NOTIFY scaleChanged)
+    Q_PROPERTY(int lineRadiusScaledRounded READ lineRadiusScaledRounded NOTIFY scaleChanged)
+    Q_PROPERTY(int indicatorBorderRadiusScaledRounded READ indicatorBorderRadiusScaledRounded NOTIFY scaleChanged)
+    Q_PROPERTY(int indicatorFillingRadiusScaledRounded READ indicatorBorderRadiusScaledRounded NOTIFY scaleChanged)
     Q_ENUMS(Colors)
 
 public:
@@ -21,6 +27,11 @@ public:
             QFile::copy(":/MnemoSettings.ini", "MnemoSettings.ini");
 
         settings = new QSettings("MnemoSettings.ini", QSettings::IniFormat);
+
+        m_lineWidth = getValue("Line/Width", "2").toInt();
+        m_lineRadius = getValue("Line/Radius", "0").toInt();
+        m_indicatorBorderRadius = getValue("Indicator/Border/Radius", "0").toInt();
+        m_indicatorFillingRadius = getValue("Indicator/Border/Filling", "0").toInt();
     }
     ~MnemoConfig() {
         delete settings;
@@ -32,22 +43,25 @@ public:
     double scale() const { return m_scale; }
     double minSizeScaled() const { return m_minSize * m_scale; }
     int minSizeScaledRounded() const { return m_minSize * m_scale; }
+    double minFontScaled() const { return m_minFont * m_scale; }
+
+    int lineWidthScaledRounded() const { return m_lineWidth * m_scale; }
+    int lineRadiusScaledRounded() const { return m_lineRadius * m_scale; }
+    int indicatorBorderRadiusScaledRounded() const { return m_indicatorBorderRadius * m_scale; }
+    int indicatorFillingRadiusScaledRounded() const { return m_indicatorFillingRadius * m_scale; }
 
     enum class Colors {
         Background,
         DefaultColorForIndicatorBorder, GoodColorForIndicatorBorder, BadColorForIndicatorBorder,
         DefaultColorForIndicatorFilling, GoodColorForIndicatorFilling, BadColorForIndicatorFilling,
+        FamilyForIndicatorText, BoldForIndicatorText,
         DefaultColorForIndicatorText, GoodColorForIndicatorText, BadColorForIndicatorText,
         DefaultColorForLine, GoodColorForLine, BadColorForLine,
-        DefaultColorForLabel, GoodColorForLabel, BadColorForLabel
+        DefaultColorForLabel, GoodColorForLabel, BadColorForLabel, FamilyForLabel, BoldForLabel
 
     };
 
     Q_INVOKABLE QVariant getPropertyFromSettings(Colors colorEnum) {
-        auto getValue = [this](QString value, QString defaultValue) {
-            return settings->value(settings->value("General/Theme", "Dark").toString() + "/" + value, defaultValue);
-        };
-
         switch (colorEnum) {
         case Colors::Background:
             return getValue("Background", "black");
@@ -72,6 +86,10 @@ public:
             return getValue("Indicator/Text/Good", "green");
         case Colors::BadColorForIndicatorText:
             return getValue("Indicator/Text/Bad", "red");
+        case Colors::FamilyForIndicatorText:
+            return getValue("Indicator/Text/Family", "Arial");
+        case Colors::BoldForIndicatorText:
+            return getValue("Indicator/Text/Bold", "true");
 
         case Colors::DefaultColorForLine:
             return getValue("Line/Default", "blue");
@@ -86,6 +104,10 @@ public:
             return getValue("Label/Good", "green");
         case Colors::BadColorForLabel:
             return getValue("Label/Bad", "red");
+        case Colors::FamilyForLabel:
+            return getValue("Label/Family", "Sans");
+        case Colors::BoldForLabel:
+            return getValue("Label/Bold", "false");
 
         default:
             return "black";
@@ -95,8 +117,21 @@ public:
 private:
     double m_scale = 1;
     int m_minSize = 6;
+    int m_minFont = 8;
 
-    QSettings *settings;
+    int m_lineWidth = 2;
+    int m_lineRadius = 10;
+    int m_indicatorBorderRadius = 5;
+    int m_indicatorFillingRadius = 5;
+
+    QSettings *settings = nullptr;
+
+
+    QVariant getValue(QString value, QString defaultValue) {
+        if (settings != nullptr)
+            return settings->value(settings->value("General/Theme", "Dark").toString() + "/" + value, defaultValue);
+        return QVariant();
+    }
 
 signals:
     void scaleChanged(double scale);
