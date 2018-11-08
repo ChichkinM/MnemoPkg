@@ -38,7 +38,8 @@ public:
         DefaultColorForIndicatorBorder, GoodColorForIndicatorBorder, BadColorForIndicatorBorder,
         DefaultColorForIndicatorFilling, GoodColorForIndicatorFilling, BadColorForIndicatorFilling,
         DefaultColorForIndicatorText, GoodColorForIndicatorText, BadColorForIndicatorText,
-        DefaultColorForLine, GoodColorForLine, BadColorForLine
+        DefaultColorForLine, GoodColorForLine, BadColorForLine,
+        DefaultColorForLabel, GoodColorForLabel, BadColorForLabel
 
     };
 
@@ -73,11 +74,18 @@ public:
             return getValue("Indicator/Text/Bad", "red");
 
         case Colors::DefaultColorForLine:
-            return getValue("Indicator/Line/Default", "blue");
+            return getValue("Line/Default", "blue");
         case Colors::GoodColorForLine:
-            return getValue("Indicator/Line/Good", "green");
+            return getValue("Line/Good", "green");
         case Colors::BadColorForLine:
-            return getValue("Indicator/Line/Bad", "red");
+            return getValue("Line/Bad", "red");
+
+        case Colors::DefaultColorForLabel:
+            return getValue("Label/Default", "blue");
+        case Colors::GoodColorForLabel:
+            return getValue("Label/Good", "green");
+        case Colors::BadColorForLabel:
+            return getValue("Label/Bad", "red");
 
         default:
             return "black";
