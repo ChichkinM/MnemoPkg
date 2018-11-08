@@ -32,6 +32,7 @@ public:
         m_lineRadius = getValue("Line/Radius", "0").toInt();
         m_indicatorBorderRadius = getValue("Indicator/Border/Radius", "0").toInt();
         m_indicatorFillingRadius = getValue("Indicator/Border/Filling", "0").toInt();
+        m_minFont = getValue("General/MinFont", "8").toInt();
     }
     ~MnemoConfig() {
         delete settings;
@@ -117,12 +118,12 @@ public:
 private:
     double m_scale = 1;
     int m_minSize = 6;
-    int m_minFont = 8;
+    int m_minFont = 0;
 
-    int m_lineWidth = 2;
-    int m_lineRadius = 10;
-    int m_indicatorBorderRadius = 5;
-    int m_indicatorFillingRadius = 5;
+    int m_lineWidth = 0;
+    int m_lineRadius = 0;
+    int m_indicatorBorderRadius = 0;
+    int m_indicatorFillingRadius = 0;
 
     QSettings *settings = nullptr;
 
