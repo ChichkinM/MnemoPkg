@@ -16,12 +16,10 @@ public:
             static int i = 0;
             i++;
 
-            if (handler != nullptr) {
-                if (i % 2 == 0)
-                    handler->setPropertySafely("page1_i2", "borderColor", "green");
-                else
-                    handler->setPropertySafely("page1_i2", "borderColor", "red");
-            }
+            if (i % 2 == 0)
+                handler.setPropertySafely("page1_i2", "borderColor", "green");
+            else
+                handler.setPropertySafely("page1_i2", "borderColor", "red");
         });
         t->start(1000);
     }

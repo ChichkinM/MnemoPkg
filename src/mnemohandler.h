@@ -8,8 +8,9 @@ class MnemoHandler : public QObject
 {
     Q_OBJECT
 public:
+    explicit MnemoHandler(QObject *parent = nullptr) : QObject(parent) { }
     explicit MnemoHandler(QObject *qmlRootObject, QObject *parent = nullptr) : QObject(parent) {
-        this->qmlRootObject = qmlRootObject;
+        setRootObject(qmlRootObject);
     }
 
     /* parentObjName может быть использован, для доступа к объектам через индексы.
@@ -29,6 +30,11 @@ public:
 //                                                                    propertyName, propertyValue);
 //            }
         }
+    }
+
+public slots:
+    void setRootObject(QObject *qmlRootObject) {
+        this->qmlRootObject = qmlRootObject;
     }
 
 private:

@@ -18,24 +18,28 @@ class MnemoPkg : public QObject
     Q_OBJECT
 public:
     explicit MnemoPkg(QQmlApplicationEngine *engine, QObject *parent = nullptr) : QObject(parent) {
+        connect(engine, SIGNAL(objectCreated(QObject*,QUrl)), &handler, SLOT(setRootObject(QObject*)));
+        registerComponents(engine);
+    }
+
+    explicit MnemoPkg(QQmlEngine *engine, QObject *parent = nullptr) : QObject(parent) {
+        registerComponents(engine);
+    }
+
+    MnemoHandler handler;
+
+protected:
+    MnemoConfig mnemoConfig;
+    MnemoHelper mnemoHelper;
+
+private:
+    void registerComponents(QQmlEngine *engine) {
         engine->rootContext()->setContextProperty("ConfigObj", &mnemoConfig);
         engine->rootContext()->setContextProperty("MnemoHelper", &mnemoHelper);
 
         qmlRegisterType<MnemoConfig>("ConfigType", 1, 0, "ConfigType");
         CLine::registerComponents();
-
-        connect(engine, SIGNAL(objectCreated(QObject*,QUrl)), this, SLOT(addRootObject(QObject*)));
     }
-
-public slots:
-    void addRootObject(QObject *qmlRootObject) {
-        handler = new MnemoHandler(qmlRootObject);
-    }
-
-protected:
-    MnemoConfig mnemoConfig;
-    MnemoHelper mnemoHelper;
-    MnemoHandler *handler = nullptr;
 };
 
 #endif // MNEMOPKG_H
