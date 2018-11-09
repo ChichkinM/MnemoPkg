@@ -23,12 +23,11 @@ public:
                 if (obj != nullptr)
                     obj->setProperty(propertyName.toLatin1(), propertyValue);
             }
-//            else {
-//                QObject *parentObject = qmlRootObj->findChild<QObject*>(parentObjectName);
-//                if (parentObject != nullptr)
-//                    emit Config::get()->setColorForRepeaterChild(parentObj, objName,
-//                                                                    propertyName, propertyValue);
-//            }
+            else {
+                QObject *parentObject = qmlRootObject->findChild<QObject*>(parentObjectName);
+                if (parentObject != nullptr)
+                    emit setPropertyForNestedItem(parentObject, objectName, propertyName, propertyValue);
+            }
         }
     }
 
@@ -39,6 +38,10 @@ public slots:
 
 private:
     QObject *qmlRootObject = nullptr;
+
+signals:
+    void setPropertyForNestedItem(QObject *repeaterObj, QString childObjName,
+                                  QString property, QVariant value);
 };
 
 #endif // MNEMOHANDLER_H

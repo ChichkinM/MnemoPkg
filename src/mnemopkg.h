@@ -34,6 +34,9 @@ protected:
 
 private:
     void registerComponents(QQmlEngine *engine) {
+        connect(&handler, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)),
+                &mnemoHelper, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)));
+
         engine->rootContext()->setContextProperty("ConfigObj", &mnemoConfig);
         engine->rootContext()->setContextProperty("MnemoHelper", &mnemoHelper);
 

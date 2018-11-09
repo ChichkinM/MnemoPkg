@@ -16,10 +16,14 @@ public:
             static int i = 0;
             i++;
 
-            if (i % 2 == 0)
+            if (i % 2 == 0) {
                 handler.setPropertySafely("page1_i2", "borderColor", "green");
-            else
+                handler.setPropertySafely("page3_i1", "borderColor", "green", "page3_repeater");
+            }
+            else {
                 handler.setPropertySafely("page1_i2", "borderColor", "red");
+                handler.setPropertySafely("page3_i1", "borderColor", "red", "page3_repeater");
+            }
         });
         t->start(1000);
     }
