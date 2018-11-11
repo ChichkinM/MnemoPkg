@@ -3,7 +3,8 @@ INCLUDEPATH += $$PWD
 HEADERS += \
     $$PWD/mnemopkg.h \
     $$PWD/mnemoconfig.h \
-    $$PWD/mnemohelper.h
+    $$PWD/mnemohelper.h \
+    $$PWD/mnemohandler.h
 
 SOURCES += \
     $$PWD/mnemopkg.cpp

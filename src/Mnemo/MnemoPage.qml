@@ -30,6 +30,17 @@ Item {
             MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()
     }
 
+    Connections { target: MnemoHelper; onSetPropertyForNestedItem: {
+            for (var i = 0; i < repeaterObj.count; i++) {
+                var item = repeaterObj.itemAt(i)
+                if (item !== null && item.objectName === childObjName) {
+                    MnemoHelper.setProperty(item, propertyName, value)
+                    break
+                }
+            }
+        }
+    }
+
     focus: true
     Keys.onEscapePressed: goToGeneral()
     Keys.onPressed: if (event.key === Qt.Key_Backspace) goBack()

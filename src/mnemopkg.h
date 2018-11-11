@@ -1,25 +1,48 @@
 #ifndef MNEMOPKG_H
 #define MNEMOPKG_H
 
+#include <QDebug>
 #include <QObject>
-#include <QQmlEngine>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 #include "mnemoconfig.h"
 #include "mnemohelper.h"
+#include "mnemohandler.h"
+
+#include "cline.h"
+
 
 class MnemoPkg : public QObject
 {
     Q_OBJECT
 public:
-    explicit MnemoPkg(QQmlEngine *engine, QObject *parent = nullptr);
+    explicit MnemoPkg(QQmlApplicationEngine *engine, QObject *parent = nullptr) : QObject(parent) {
+        connect(engine, SIGNAL(objectCreated(QObject*,QUrl)), &handler, SLOT(setRootObject(QObject*)));
+        registerComponents(engine);
+    }
 
-private:
+    explicit MnemoPkg(QQmlEngine *engine, QObject *parent = nullptr) : QObject(parent) {
+        registerComponents(engine);
+    }
+
+    MnemoHandler handler;
+
+protected:
     MnemoConfig mnemoConfig;
     MnemoHelper mnemoHelper;
 
-signals:
+private:
+    void registerComponents(QQmlEngine *engine) {
+        connect(&handler, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)),
+                &mnemoHelper, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)));
 
-public slots:
+        engine->rootContext()->setContextProperty("ConfigObj", &mnemoConfig);
+        engine->rootContext()->setContextProperty("MnemoHelper", &mnemoHelper);
+
+        qmlRegisterType<MnemoConfig>("ConfigType", 1, 0, "ConfigType");
+        CLine::registerComponents();
+    }
 };
 
 #endif // MNEMOPKG_H
