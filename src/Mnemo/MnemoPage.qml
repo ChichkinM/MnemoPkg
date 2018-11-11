@@ -23,10 +23,10 @@ Item {
 
     Component.onCompleted: {
         if (defaultFoucusObjectName !== "")
-            trySetDefaultFocus(objectName, defaultFoucusObjectName)
+            MnemoHelper.trySetDefaultItemWithFocus(objectName, defaultFoucusObjectName)
 
-        var itemWithFocus = getFocus(objectName)
-        if (itemWithFocus !== undefined && itemWithFocus !== null)
+        var itemWithFocus = MnemoHelper.getItemWithFocus(objectName)
+        if (itemWithFocus !== undefined && itemWithFocus !== null && itemWithFocus !== "")
             MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()
     }
 

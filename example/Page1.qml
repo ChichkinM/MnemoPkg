@@ -25,7 +25,7 @@ Mnemo.MnemoPage {
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
 
         onGoInside: {
-            saveFocus(root.objectName, objectName)
+            MnemoHelper.saveItemWithFocus(root.objectName, objectName)
             goTo("qrc:/Page2.qml")
         }
     }

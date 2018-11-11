@@ -26,7 +26,7 @@ Mnemo.MnemoPage {
         KeyNavigation.down: i3
 
         onGoInside: {
-            saveFocus(root.objectName, objectName)
+            MnemoHelper.saveItemWithFocus(root.objectName, objectName)
             goTo("qrc:/Page3.qml")
         }
     }

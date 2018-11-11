@@ -30,7 +30,7 @@ MouseArea {
 
     onFocusChanged: {
         if (focus)
-            saveFocus(pageObjectName, objectName)
+            MnemoHelper.saveItemWithFocus(pageObjectName, objectName)
     }
 
 
