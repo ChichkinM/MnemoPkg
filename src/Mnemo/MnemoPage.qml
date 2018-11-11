@@ -17,16 +17,16 @@ Item {
         goTo(mainPageSource)
     }
 
-    function makeItemObjectName(itemName) {
+    function makeObjectName(itemName) {
         return root.objectName + "_" + itemName
     }
 
     Component.onCompleted: {
         if (defaultFoucusObjectName !== "")
-            trySetDefaultFocus(objectName, defaultFoucusObjectName)
+            MnemoHelper.trySetDefaultItemWithFocus(objectName, defaultFoucusObjectName)
 
-        var itemWithFocus = getFocus(objectName)
-        if (itemWithFocus !== undefined && itemWithFocus !== null)
+        var itemWithFocus = MnemoHelper.getItemWithFocus(objectName)
+        if (itemWithFocus !== undefined && itemWithFocus !== null && itemWithFocus !== "")
             MnemoHelper.findChild(root, itemWithFocus).forceActiveFocus()
     }
 
@@ -49,7 +49,7 @@ Item {
         id: backBtn
         anchors.top: root.top
         anchors.left: root.left
-        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        anchors.leftMargin: MnemoConfigObj.minSizeScaled * 2
         text: "Назад"
         visible: root.showBackBtn
 
@@ -63,7 +63,7 @@ Item {
         id: homeBtn
         anchors.top: backBtn.top
         anchors.left: backBtn.right
-        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        anchors.leftMargin: MnemoConfigObj.minSizeScaled * 2
         text: "Домой"
         visible: root.showHomeBtn
 
@@ -76,7 +76,7 @@ Item {
     Label {
         anchors.top: backBtn.top
         anchors.horizontalCenter: root.horizontalCenter
-        anchors.rightMargin: ConfigObj.minSizeScaled * 2
+        anchors.rightMargin: MnemoConfigObj.minSizeScaled * 2
         text: root.title
         visible: root.showPageTitle
     }

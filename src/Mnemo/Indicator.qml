@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import "./Base"
-import ConfigType 1.0
+import MnemoConfigType 1.0
 
 BaseIndicator {
     id: root
@@ -20,15 +20,15 @@ BaseIndicator {
         anchors.fill: root
         color: "transparent"
         border.color: root.borderColor
-        border.width: 2 * ConfigObj.scale
-        radius: ConfigObj.indicatorBorderRadiusScaledRounded
+        border.width: 2 * MnemoConfigObj.scale
+        radius: MnemoConfigObj.indicatorBorderRadiusScaledRounded
     }
 
     Rectangle {
-        width: Math.round(root.width - ConfigObj.minSizeScaled * 2)
-        height: Math.round(root.height - ConfigObj.minSizeScaled * 2)
+        width: Math.round(root.width - MnemoConfigObj.minSizeScaled * 2)
+        height: Math.round(root.height - MnemoConfigObj.minSizeScaled * 2)
         anchors.centerIn: root
         color: root.fillingColor
-        radius: ConfigObj.indicatorFillingRadiusScaledRounded
+        radius: MnemoConfigObj.indicatorFillingRadiusScaledRounded
     }
 }

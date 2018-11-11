@@ -10,33 +10,37 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i1
-        objectName: makeItemObjectName("i1")
-        x: ConfigObj.minSizeScaledRounded * 2
-        y: headerY + ConfigObj.minSizeScaledRounded * 2
+        objectName: makeObjectName("i1")
+        x: MnemoConfigObj.minSizeScaledRounded * 2
+        y: headerY + MnemoConfigObj.minSizeScaledRounded * 2
 
         KeyNavigation.down: i2
     }
 
     Mnemo.Indicator {
         id: i2
-        objectName: makeItemObjectName("i2")
+        objectName: makeObjectName("i2")
+        text: "Страница 2"
+
         anchors.left: i1.left
         anchors.top: i1.bottom
-        anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
+        anchors.topMargin: MnemoConfigObj.minSizeScaledRounded * 2
 
         onGoInside: {
-            saveFocus(root.objectName, objectName)
+            MnemoHelper.saveItemWithFocus(root.objectName, objectName)
             goTo("qrc:/Page2.qml")
         }
     }
 
     Mnemo.Line {
+        objectName: makeObjectName("l1")
         points: [
             CPoint { x: i1.slotRightFromCenterX(); y: i1.slotRightFromCenterY(0) },
-            CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
+            CPoint { x: i1.slotRightFromCenterX() + MnemoConfigObj.minSizeScaledRounded * 8;
                 y: i1.slotRightFromCenterY(0) },
-            CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
-                y: i1.slotRightFromCenterY(0) + ConfigObj.minSizeScaledRounded * 8 }
+            CPoint { x: i1.slotRightFromCenterX() + MnemoConfigObj.minSizeScaledRounded * 8;
+                y: i2.slotRightFromCenterY(0) },
+            CPoint { x: i2.slotRightFromCenterX(); y: i2.slotRightFromCenterY(0) }
         ]
     }
 }

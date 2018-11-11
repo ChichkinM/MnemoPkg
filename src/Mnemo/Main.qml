@@ -1,11 +1,26 @@
 import QtQuick 2.0
-import ConfigType 1.0
+import MnemoConfigType 1.0
 
 Rectangle {
     id: root
-    color: ConfigObj.getPropertyFromSettings(ConfigType.Background)
+    color: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.Background)
 
     property string mainPageSource
+
+    property int defaultWidthForScale
+    property int defaultHeightForScale
+
+    onWidthChanged: setScale()
+    onHeightChanged: setScale()
+    function setScale() {
+        if (defaultWidthForScale > 0 && defaultHeightForScale > 0) {
+            if (root.width < root.height)
+                MnemoConfigObj.setScale(root.width / defaultWidthForScale)
+            else
+                MnemoConfigObj.setScale(root.height / defaultHeightForScale)
+        }
+    }
+
 
     Loader {
         id: pageLoader
@@ -14,38 +29,8 @@ Rectangle {
         height: Math.round(root.height)
         focus: true
 
-        property var elementWithFocus: []
-        property var pageForElementWithFocus: []
-
         property string mainPageSource: root.mainPageSource
         source: root.mainPageSource
-
-        function saveFocus(pageObjectName, itemObjectName) {
-            for (var i = 0; i < pageForElementWithFocus.length; i++)
-                if (pageForElementWithFocus[i] === pageObjectName) {
-                    elementWithFocus[i] = itemObjectName
-                    return
-                }
-
-            pageForElementWithFocus.push(pageObjectName)
-            elementWithFocus.push(itemObjectName)
-        }
-
-        function getFocus(pageObjectName) {
-            for (var i = 0; i < pageForElementWithFocus.length; i++)
-                if (pageForElementWithFocus[i] === pageObjectName)
-                    return elementWithFocus[i]
-            return undefined
-        }
-
-        function trySetDefaultFocus(pageObjectName, itemObjectName) {
-            for (var i = 0; i < pageForElementWithFocus.length; i++)
-                if (pageForElementWithFocus[i] === pageObjectName)
-                    return
-
-            pageForElementWithFocus.push(pageObjectName)
-            elementWithFocus.push(itemObjectName)
-        }
     }
 
     Connections { target: pageLoader.item; onGoTo: {
