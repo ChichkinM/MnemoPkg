@@ -12,11 +12,11 @@ Mnemo.MnemoPage {
         x: ConfigObj.minSizeScaledRounded * 70
         y: headerY + ConfigObj.minSizeScaledRounded * 2
 
-        objectName: makeItemObjectName("repeater")
+        objectName: makeObjectName("repeater")
         model: [
-            makeItemObjectName("i1"), makeItemObjectName("i2"),
-            makeItemObjectName("i3"), makeItemObjectName("i4"),
-            makeItemObjectName("i5"), makeItemObjectName("i6") ]
+            makeObjectName("i1"), makeObjectName("i2"),
+            makeObjectName("i3"), makeObjectName("i4"),
+            makeObjectName("i5"), makeObjectName("i6") ]
         focus: true
 
         Mnemo.Indicator {

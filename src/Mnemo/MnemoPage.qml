@@ -17,7 +17,7 @@ Item {
         goTo(mainPageSource)
     }
 
-    function makeItemObjectName(itemName) {
+    function makeObjectName(itemName) {
         return root.objectName + "_" + itemName
     }
 

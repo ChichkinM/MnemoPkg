@@ -10,7 +10,7 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i1
-        objectName: makeItemObjectName("i1")
+        objectName: makeObjectName("i1")
         x: ConfigObj.minSizeScaledRounded * 2
         y: headerY + ConfigObj.minSizeScaledRounded * 2
 
@@ -19,7 +19,7 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i2
-        objectName: makeItemObjectName("i2")
+        objectName: makeObjectName("i2")
         anchors.left: i1.left
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2

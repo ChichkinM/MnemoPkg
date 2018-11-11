@@ -10,7 +10,7 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i1
-        objectName: makeItemObjectName("i1")
+        objectName: makeObjectName("i1")
         anchors.right: root.right
         anchors.rightMargin: ConfigObj.minSizeScaledRounded * 2
         y: headerY + ConfigObj.minSizeScaledRounded * 2
@@ -19,7 +19,7 @@ Mnemo.MnemoPage {
 
     Mnemo.Indicator {
         id: i2
-        objectName: makeItemObjectName("i2")
+        objectName: makeObjectName("i2")
         anchors.left: i1.left
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
@@ -37,20 +37,20 @@ Mnemo.MnemoPage {
 
         Mnemo.Indicator {
             id: i3
-            objectName: makeItemObjectName("i3")
+            objectName: makeObjectName("i3")
             KeyNavigation.down: i4
 
         }
 
         Mnemo.Indicator {
             id: i4
-            objectName: makeItemObjectName("i4")
+            objectName: makeObjectName("i4")
             KeyNavigation.down: i5
         }
 
         Mnemo.Indicator {
             id: i5
-            objectName: makeItemObjectName("i5")
+            objectName: makeObjectName("i5")
         }
     }
 }
