@@ -7,6 +7,21 @@ Rectangle {
 
     property string mainPageSource
 
+    property int defaultWidthForScale
+    property int defaultHeightForScale
+
+    onWidthChanged: setScale()
+    onHeightChanged: setScale()
+    function setScale() {
+        if (defaultWidthForScale > 0 && defaultHeightForScale > 0) {
+            if (root.width < root.height)
+                ConfigObj.setScale(root.width / defaultWidthForScale)
+            else
+                ConfigObj.setScale(root.height / defaultHeightForScale)
+        }
+    }
+
+
     Loader {
         id: pageLoader
 

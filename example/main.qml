@@ -12,17 +12,11 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
-    onWidthChanged: setScale()
-    onHeightChanged: setScale()
-    function setScale() {
-        if (root.width < root.height)
-            ConfigObj.setScale(root.width / 640)
-        else
-            ConfigObj.setScale(root.height / 480)
-    }
-
     Mnemo.Main {
         anchors.fill: parent
+        defaultWidthForScale: 640
+        defaultHeightForScale: 480
+
         mainPageSource: "qrc:/Page1.qml"
     }
 }
