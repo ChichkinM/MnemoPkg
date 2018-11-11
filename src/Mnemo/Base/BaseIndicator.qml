@@ -118,6 +118,7 @@ MouseArea {
         anchors.bottomMargin: - width / 2
         color: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
         visible: root.focus
+        z: 2
         Component.onCompleted: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
     }
 }

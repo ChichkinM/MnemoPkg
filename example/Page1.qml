@@ -20,6 +20,8 @@ Mnemo.MnemoPage {
     Mnemo.Indicator {
         id: i2
         objectName: makeObjectName("i2")
+        text: "Страница 2"
+
         anchors.left: i1.left
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
@@ -31,12 +33,14 @@ Mnemo.MnemoPage {
     }
 
     Mnemo.Line {
+        objectName: makeObjectName("l1")
         points: [
             CPoint { x: i1.slotRightFromCenterX(); y: i1.slotRightFromCenterY(0) },
             CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
                 y: i1.slotRightFromCenterY(0) },
             CPoint { x: i1.slotRightFromCenterX() + ConfigObj.minSizeScaledRounded * 8;
-                y: i1.slotRightFromCenterY(0) + ConfigObj.minSizeScaledRounded * 8 }
+                y: i2.slotRightFromCenterY(0) },
+            CPoint { x: i2.slotRightFromCenterX(); y: i2.slotRightFromCenterY(0) }
         ]
     }
 }

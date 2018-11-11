@@ -20,6 +20,8 @@ Mnemo.MnemoPage {
     Mnemo.Indicator {
         id: i2
         objectName: makeObjectName("i2")
+        text: "Страница 3"
+
         anchors.left: i1.left
         anchors.top: i1.bottom
         anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
