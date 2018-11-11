@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import ConfigType 1.0
+import MnemoConfigType 1.0
 
 MouseArea {
     id: root
@@ -8,20 +8,20 @@ MouseArea {
     property int widthPartsCount: 20
     property int heightPartsCount: 10
 
-    width: Math.round(widthPartsCount * ConfigObj.minSizeScaled)
-    height: Math.round(heightPartsCount * ConfigObj.minSizeScaled)
+    width: Math.round(widthPartsCount * MnemoConfigObj.minSizeScaled)
+    height: Math.round(heightPartsCount * MnemoConfigObj.minSizeScaled)
 
     property string text: "Модуль"
     property string textColor:
-        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorText)
+        MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.DefaultColorForIndicatorText)
     property string borderColor:
-        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
+        MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.DefaultColorForIndicatorBorder)
     property string fillingColor:
-        ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorFilling)
+        MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.DefaultColorForIndicatorFilling)
 
-    property string fontSize: ConfigObj.minFontScaled * 2
-    property bool fontBold: ConfigObj.getPropertyFromSettings(ConfigType.BoldForIndicatorText)
-    property string fontFamily: ConfigObj.getPropertyFromSettings(ConfigType.FamilyForIndicatorText)
+    property string fontSize: MnemoConfigObj.minFontScaled * 2
+    property bool fontBold: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.BoldForIndicatorText)
+    property string fontFamily: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.FamilyForIndicatorText)
 
     //необходимо для высчитывания абсолютных координат
     property var parents: [parent, parent.parent]
@@ -69,7 +69,7 @@ MouseArea {
     function
     slotLeftFromCenterY(slotNumber) {
         return Math.round( getParentAdditionY() +
-                          root.y + ConfigObj.minSizeScaled * (root.heightPartsCount / 2) + ConfigObj.minSizeScaled * slotNumber )
+                          root.y + MnemoConfigObj.minSizeScaled * (root.heightPartsCount / 2) + MnemoConfigObj.minSizeScaled * slotNumber )
     }
 
     function slotRightFromCenterX() {
@@ -82,7 +82,7 @@ MouseArea {
 
     function slotBottomFromCenterX(slotNumber) {
         return Math.round( getParentAdditionX() +
-                          root.x + ConfigObj.minSizeScaled * (root.widthPartsCount / 2) + ConfigObj.minSizeScaled * slotNumber )
+                          root.x + MnemoConfigObj.minSizeScaled * (root.widthPartsCount / 2) + MnemoConfigObj.minSizeScaled * slotNumber )
     }
     function slotBottomFromCenterY() {
         return Math.round( getParentAdditionY() +
@@ -110,15 +110,15 @@ MouseArea {
 
 
     Rectangle {
-        width: 10 * ConfigObj.scale
+        width: 10 * MnemoConfigObj.scale
         height: width
         radius: width / 2
         anchors.horizontalCenter: root.horizontalCenter
         anchors.bottom: root.top
         anchors.bottomMargin: - width / 2
-        color: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
+        color: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.DefaultColorForIndicatorBorder)
         visible: root.focus
         z: 2
-        Component.onCompleted: ConfigObj.getPropertyFromSettings(ConfigType.DefaultColorForIndicatorBorder)
+        Component.onCompleted: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.DefaultColorForIndicatorBorder)
     }
 }

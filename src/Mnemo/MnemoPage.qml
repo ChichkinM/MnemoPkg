@@ -49,7 +49,7 @@ Item {
         id: backBtn
         anchors.top: root.top
         anchors.left: root.left
-        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        anchors.leftMargin: MnemoConfigObj.minSizeScaled * 2
         text: "Назад"
         visible: root.showBackBtn
 
@@ -63,7 +63,7 @@ Item {
         id: homeBtn
         anchors.top: backBtn.top
         anchors.left: backBtn.right
-        anchors.leftMargin: ConfigObj.minSizeScaled * 2
+        anchors.leftMargin: MnemoConfigObj.minSizeScaled * 2
         text: "Домой"
         visible: root.showHomeBtn
 
@@ -76,7 +76,7 @@ Item {
     Label {
         anchors.top: backBtn.top
         anchors.horizontalCenter: root.horizontalCenter
-        anchors.rightMargin: ConfigObj.minSizeScaled * 2
+        anchors.rightMargin: MnemoConfigObj.minSizeScaled * 2
         text: root.title
         visible: root.showPageTitle
     }

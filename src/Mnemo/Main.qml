@@ -1,9 +1,9 @@
 import QtQuick 2.0
-import ConfigType 1.0
+import MnemoConfigType 1.0
 
 Rectangle {
     id: root
-    color: ConfigObj.getPropertyFromSettings(ConfigType.Background)
+    color: MnemoConfigObj.getPropertyFromSettings(MnemoConfigType.Background)
 
     property string mainPageSource
 
@@ -15,9 +15,9 @@ Rectangle {
     function setScale() {
         if (defaultWidthForScale > 0 && defaultHeightForScale > 0) {
             if (root.width < root.height)
-                ConfigObj.setScale(root.width / defaultWidthForScale)
+                MnemoConfigObj.setScale(root.width / defaultWidthForScale)
             else
-                ConfigObj.setScale(root.height / defaultHeightForScale)
+                MnemoConfigObj.setScale(root.height / defaultHeightForScale)
         }
     }
 

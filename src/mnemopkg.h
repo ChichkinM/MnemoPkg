@@ -37,10 +37,10 @@ private:
         connect(&handler, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)),
                 &mnemoHelper, SIGNAL(setPropertyForNestedItem(QObject*,QString,QString,QVariant)));
 
-        engine->rootContext()->setContextProperty("ConfigObj", &mnemoConfig);
+        engine->rootContext()->setContextProperty("MnemoConfigObj", &mnemoConfig);
         engine->rootContext()->setContextProperty("MnemoHelper", &mnemoHelper);
 
-        qmlRegisterType<MnemoConfig>("ConfigType", 1, 0, "ConfigType");
+        qmlRegisterType<MnemoConfig>("MnemoConfigType", 1, 0, "MnemoConfigType");
         CLine::registerComponents();
     }
 };

@@ -12,8 +12,8 @@ Mnemo.MnemoPage {
         id: i1
         objectName: makeObjectName("i1")
         anchors.right: root.right
-        anchors.rightMargin: ConfigObj.minSizeScaledRounded * 2
-        y: headerY + ConfigObj.minSizeScaledRounded * 2
+        anchors.rightMargin: MnemoConfigObj.minSizeScaledRounded * 2
+        y: headerY + MnemoConfigObj.minSizeScaledRounded * 2
         KeyNavigation.down: i2
     }
 
@@ -24,7 +24,7 @@ Mnemo.MnemoPage {
 
         anchors.left: i1.left
         anchors.top: i1.bottom
-        anchors.topMargin: ConfigObj.minSizeScaledRounded * 2
+        anchors.topMargin: MnemoConfigObj.minSizeScaledRounded * 2
         KeyNavigation.down: i3
 
         onGoInside: {
@@ -35,7 +35,7 @@ Mnemo.MnemoPage {
 
     Column {
         anchors.centerIn: root
-        spacing: ConfigObj.minSizeScaledRounded
+        spacing: MnemoConfigObj.minSizeScaledRounded
 
         Mnemo.Indicator {
             id: i3

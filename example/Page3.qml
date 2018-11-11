@@ -9,8 +9,8 @@ Mnemo.MnemoPage {
 
     Repeater {
         id: repeater
-        x: ConfigObj.minSizeScaledRounded * 70
-        y: headerY + ConfigObj.minSizeScaledRounded * 2
+        x: MnemoConfigObj.minSizeScaledRounded * 70
+        y: headerY + MnemoConfigObj.minSizeScaledRounded * 2
 
         objectName: makeObjectName("repeater")
         model: [
@@ -22,7 +22,7 @@ Mnemo.MnemoPage {
         Mnemo.Indicator {
             objectName: modelData
             x: repeater.x
-            y: repeater.y + (height + ConfigObj.minSizeScaledRounded * 2) * index
+            y: repeater.y + (height + MnemoConfigObj.minSizeScaledRounded * 2) * index
         }
     }
 }
