@@ -7,7 +7,7 @@ HEADERS += \
     $$PWD/mnemohandler.h
 
 SOURCES += \
-    $$PWD/mnemopkg.cpp
+    $$PWD/mnemoconfig.cpp
 
 RESOURCES += \
     $$PWD/qrc.qrc
